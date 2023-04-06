@@ -1,11 +1,14 @@
-import { useGlobalStore } from '../Content.presenter'
+import { globalPresenter, useEncryptStore } from '../Content.presenter'
 
 export const Home = () => {
-  const { setLogin } = useGlobalStore()
+  const { logout } = globalPresenter()
+  const { cipherSecret, secret } = useEncryptStore()
   return (
     <div>
       <h2>Home</h2>
-      <button onClick={() => setLogin(false)}>Logout</button>
+      <p>secret: {secret}</p>
+      <p>cipherSecret: {cipherSecret}</p>
+      <button onClick={logout}>Logout</button>
     </div>
   )
 }

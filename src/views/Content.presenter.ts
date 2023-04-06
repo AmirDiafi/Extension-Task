@@ -1,3 +1,4 @@
+import { useCallback } from 'react'
 import { create } from 'zustand'
 
 export type TGlobalValues = {
@@ -12,9 +13,26 @@ export type TGlobalActions = {
 
 export type TGlobalStore = TGlobalValues & TGlobalActions
 
-const initialValue = {
-  isLoggedIn: true,
-  isIntro: false,
+export type TEncryptionValues = {
+  cipherSecret: string | undefined
+  secret: string | undefined
+}
+
+export type TEncryptionActions = {
+  setEncryption: (cipherSecret: string | undefined) => void
+  setSecret: (secret: string | undefined) => void
+}
+
+export type TEncryptionStore = TEncryptionValues & TEncryptionActions
+
+const initialValue: TGlobalValues = {
+  isLoggedIn: false,
+  isIntro: true,
+}
+
+const initialEncryptValue: TEncryptionValues = {
+  cipherSecret: undefined,
+  secret: undefined,
 }
 
 export const useGlobalStore = create<TGlobalStore>((set) => ({
@@ -29,4 +47,18 @@ export const useGlobalStore = create<TGlobalStore>((set) => ({
     })),
 }))
 
-export const globalPresenter = () => {}
+export const useEncryptStore = create<TEncryptionStore>((set) => ({
+  ...initialEncryptValue,
+  setEncryption: (cipherSecret) => set(() => ({ cipherSecret })),
+  setSecret: (secret) => set(() => ({ secret })),
+}))
+
+export const globalPresenter = () => {
+  const { setLogin } = useGlobalStore()
+
+  const logout = useCallback(() => {
+    setLogin(false)
+  }, [])
+
+  return { logout }
+}

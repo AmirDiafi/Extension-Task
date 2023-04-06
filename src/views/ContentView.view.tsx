@@ -1,18 +1,20 @@
-import { useGlobalStore } from './Content.presenter'
+import { useEncryptStore, useGlobalStore } from './Content.presenter'
 import { Home } from './Home/Home.view'
 import { Intro } from './Intro/Intro.view'
 import { Login } from './Login/Login.view'
 
 const ContentView = () => {
-  const { isIntro, isLoggedIn } = useGlobalStore()
+  const { isLoggedIn } = useGlobalStore()
+  const { secret, cipherSecret } = useEncryptStore()
 
-  if (isIntro) {
+  if (!secret) {
     return <Intro />
-  } else if (isLoggedIn) {
-    return <Home />
-  } else {
-    return <Login />
   }
+  if (isLoggedIn && cipherSecret) {
+    return <Home />
+  }
+
+  return <Login />
 }
 
 export default ContentView

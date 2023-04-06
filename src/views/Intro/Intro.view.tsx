@@ -1,11 +1,16 @@
-import { useGlobalStore } from '../Content.presenter'
+import '../../styles/intro.css'
+import { useIntroPresenter } from './intro.presenter'
 
 export const Intro = () => {
-  const { setIntro } = useGlobalStore()
+  const { onEncrypt } = useIntroPresenter()
+
   return (
-    <div>
-      <h2>Intro</h2>
-      <button onClick={() => setIntro(false)}>Start</button>
+    <div className='intro-container'>
+      <h2 className='intro-heading'>Secret Gen</h2>
+      <p className='intro-text'>start now to get your server key.</p>
+      <button className='intro-button' onClick={onEncrypt}>
+        Start
+      </button>
     </div>
   )
 }
