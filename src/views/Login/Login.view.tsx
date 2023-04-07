@@ -13,18 +13,23 @@ export const Login = () => {
 
   const handlePasswordChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      setPassword(event.target.value)
-      setError('')
+      const password = event.target.value
+      setPassword(password)
+      const isError =
+        password.length && confirm.length && confirmPassword !== password
+      setError(isError ? 'Passwords do not match' : '')
     },
-    []
+    [confirmPassword]
   )
 
   const handleConfirmPasswordChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      setConfirmPassword(event.target.value)
-      setError('')
+      const confirm = event.target.value
+      setConfirmPassword(confirm)
+      const isError = password.length && confirm.length && confirm !== password
+      setError(isError ? 'Passwords do not match' : '')
     },
-    []
+    [password]
   )
 
   const handleSubmit = useCallback(
