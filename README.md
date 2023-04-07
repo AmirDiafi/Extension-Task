@@ -4,21 +4,21 @@ This is a Google Chrome extension that renders a table that authorizes user and 
 
 ## Main Details
 
-- Extension window should pop up on installation
+[x] Extension window should pop up on installation
 
-- Add intro page to start and generate new secret (Initialize after start)
+[x] Add intro page to start and generate new secret (Initialize after start)
 
-- If started, and close app, then open it again, it will ask them to login.
+[x] If started, and close app, then open it again, it will ask them to login.
 
-- If extension was NOT initialized before, it should generate and present to a user a new secret (secret - just a random string of a static length)
+[x] If extension was NOT initialized before, it should generate and present to a user a new secret (secret [x] just a random string of a static length)
 
-- When user logged in, it will able to see it's secret key and the cypher key as well.
+[x] When user logged in, it will able to see it's secret key and the cypher key as well.
 
-- They can regenerate the secret, then the cipher key will be updated.
+[x] They can regenerate the secret, then the cipher key will be updated.
 
-- Logout button, also has button when logout to clear the status as new application
+[x] Logout button, also has button when logout to clear the status as new application
 
-- On a subsequent browser opening, extension should not open a pop-up window.
+[x] On a subsequent browser opening, extension should not open a pop-up window.
 
 ## Technologies Used
 
