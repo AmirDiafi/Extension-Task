@@ -1,5 +1,8 @@
 import { useCallback } from 'react'
 import { create } from 'zustand'
+import { persist, devtools } from 'zustand/middleware'
+import { encrypt, generateSecret } from '../utils'
+import { secretKey } from '../contants'
 
 export type TGlobalValues = {
   isLoggedIn: boolean
@@ -35,30 +38,61 @@ const initialEncryptValue: TEncryptionValues = {
   secret: undefined,
 }
 
-export const useGlobalStore = create<TGlobalStore>((set) => ({
-  ...initialValue,
-  setLogin: (isLoggedIn) =>
-    set(() => ({
-      isLoggedIn,
-    })),
-  setIntro: (isIntro) =>
-    set(() => ({
-      isIntro,
-    })),
-}))
+export const useGlobalStore = create<TGlobalStore>()(
+  devtools(
+    persist(
+      (set) => ({
+        ...initialValue,
+        setLogin: (isLoggedIn) =>
+          set(() => ({
+            isLoggedIn,
+          })),
+        setIntro: (isIntro) =>
+          set(() => ({
+            isIntro,
+          })),
+      }),
+      {
+        name: 'auth-storage',
+      }
+    )
+  )
+)
 
-export const useEncryptStore = create<TEncryptionStore>((set) => ({
-  ...initialEncryptValue,
-  setEncryption: (cipherSecret) => set(() => ({ cipherSecret })),
-  setSecret: (secret) => set(() => ({ secret })),
-}))
+export const useEncryptStore = create<TEncryptionStore>()(
+  devtools(
+    persist(
+      (set) => ({
+        ...initialEncryptValue,
+        setEncryption: (cipherSecret) => set(() => ({ cipherSecret })),
+        setSecret: (secret) => set(() => ({ secret })),
+      }),
+      {
+        name: 'main-storage',
+      }
+    )
+  )
+)
 
 export const globalPresenter = () => {
-  const { setLogin } = useGlobalStore()
+  const { setLogin, setIntro } = useGlobalStore()
+  const { setSecret, setEncryption } = useEncryptStore()
 
-  const logout = useCallback(() => {
+  const logout = useCallback((logout?: boolean) => {
     setLogin(false)
+    setEncryption(undefined)
+    setIntro(false)
+
+    logout && setSecret(undefined)
   }, [])
 
-  return { logout }
+  const regenerate = useCallback(async () => {
+    const secretValue = await generateSecret(30)
+    setSecret(secretValue)
+    const cipherSecret = encrypt(secretValue, secretKey)
+
+    setEncryption(cipherSecret)
+  }, [])
+
+  return { logout, regenerate }
 }

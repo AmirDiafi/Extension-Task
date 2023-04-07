@@ -2,6 +2,7 @@ import { useState, useCallback } from 'react'
 import { useEncryptStore, useGlobalStore } from '../Content.presenter'
 import '../../styles/login.css'
 import { encrypt } from '../../utils'
+import { secretKey } from '../../contants'
 
 export const Login = () => {
   const { setLogin } = useGlobalStore()
@@ -32,8 +33,7 @@ export const Login = () => {
       // MARK This is wont happen, because we're not
       // displaying the login page if there is no secret
       if (password === confirmPassword && secret) {
-        const key = 'my-secret-key'
-        const cipherSecret = encrypt(secret, key)
+        const cipherSecret = encrypt(secret, secretKey)
 
         setEncryption(cipherSecret)
         setLogin(true)
@@ -50,6 +50,7 @@ export const Login = () => {
   return (
     <div className='container'>
       <form onSubmit={handleSubmit} className='form'>
+        <h2 className='title'>Login</h2>
         <div className='input-group'>
           <label className='label'>Password:</label>
           <input
