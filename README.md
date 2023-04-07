@@ -1,4 +1,6 @@
-# Extension Task
+# Google extension task
+
+This is a Google Chrome extension that renders a table that authorizes user and stores user secret in encrypted in the storage:
 
 ## Main Details:
 
@@ -34,26 +36,10 @@ This feature enables the user to log out of the extension and clear the status a
 
 This feature ensures that the extension does not open a pop-up window on subsequent browser openings. It can be achieved by checking the state of the extension in the background script.
 
-## Technologies:
+## Technologies Used
 
-The extension is built using the following technologies:
-
-### React
-
-React is a JavaScript library for building user interfaces. It is used in this extension to create the user interface for the extension.
-
-### TypeScript
-
-TypeScript is a typed superset of JavaScript that compiles to plain JavaScript. It is used in this extension to provide type safety and better code organization.
-
-### Vite
-
-Vite is a build tool that focuses on speed and efficiency. It is used in this extension to bundle the React components and TypeScript code.
-
-### Zustand (persistent version)
-
-Zustand is a state management library for React. It is used in this extension to manage the state of the extension and ensure persistence across browser sessions.
-
-### CryptoJS
-
-CryptoJS is a library of cryptographic algorithms that can be used in JavaScript. It is used in this extension to encrypt and decrypt the user's secret key.
+- [ReactJS](https://reactjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Vite](https://vitejs.dev/)
+- [Zustand](https://github.com/pmndrs/zustand) (persistence version)
+- [MVP architecture(https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93presenter#:~:text=by%20Derek%20Greer.-,Overview,upon%20in%20the%20user%20interface.)]
