@@ -30,7 +30,7 @@ export const Home = () => {
           defaultChecked={checked}
           onChange={() => setChecked((v) => !v)}
         />
-        As new Application?
+        As new Application?(reset to new secret)
       </label>
     </div>
   )
