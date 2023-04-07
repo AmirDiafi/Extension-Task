@@ -26,4 +26,4 @@ This is a Google Chrome extension that renders a table that authorizes user and 
 - [TypeScript](https://www.typescriptlang.org/)
 - [Vite](https://vitejs.dev/)
 - [Zustand](https://github.com/pmndrs/zustand) (persistence version)
-- [MVP] architecture(<https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93presenter#:~:text=by%20Derek%20Greer.->,Overview,upon%20in%20the%20user%20interface.)
+- [MVP architecture](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93presenter#:~:text=by%20Derek%20Greer.-,Overview,upon%20in%20the%20user%20interface.)
