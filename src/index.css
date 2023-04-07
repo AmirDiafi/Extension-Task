@@ -17,8 +17,8 @@
 
 body {
   margin: 0;
-  width: 320px;
-  height: 450px;
+  min-width: 320px;
+  min-height: 450px;
   background-color: #f0f0f0;
   padding: 10px;
 }

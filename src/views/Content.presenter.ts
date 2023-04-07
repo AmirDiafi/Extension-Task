@@ -6,12 +6,10 @@ import { secretKey } from '../contants'
 
 export type TGlobalValues = {
   isLoggedIn: boolean
-  isIntro: boolean
 }
 
 export type TGlobalActions = {
   setLogin: (isLoggedIn: boolean) => void
-  setIntro: (isIntro: boolean) => void
 }
 
 export type TGlobalStore = TGlobalValues & TGlobalActions
@@ -30,7 +28,6 @@ export type TEncryptionStore = TEncryptionValues & TEncryptionActions
 
 const initialValue: TGlobalValues = {
   isLoggedIn: false,
-  isIntro: true,
 }
 
 const initialEncryptValue: TEncryptionValues = {
@@ -46,10 +43,6 @@ export const useGlobalStore = create<TGlobalStore>()(
         setLogin: (isLoggedIn) =>
           set(() => ({
             isLoggedIn,
-          })),
-        setIntro: (isIntro) =>
-          set(() => ({
-            isIntro,
           })),
       }),
       {
@@ -75,13 +68,12 @@ export const useEncryptStore = create<TEncryptionStore>()(
 )
 
 export const globalPresenter = () => {
-  const { setLogin, setIntro } = useGlobalStore()
+  const { setLogin } = useGlobalStore()
   const { setSecret, setEncryption } = useEncryptStore()
 
   const logout = useCallback((logout?: boolean) => {
     setLogin(false)
     setEncryption(undefined)
-    setIntro(false)
 
     logout && setSecret(undefined)
   }, [])
